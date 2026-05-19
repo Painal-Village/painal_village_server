@@ -37,4 +37,9 @@ public class PrimaryFamilyController {
     public ResponseEntity<java.util.List<PrimaryFamilyDTO>> getChildren(@PathVariable Integer id) {
         return ResponseEntity.ok(service.getChildrenOf(id));
     }
+
+    @GetMapping("/{id}/siblings")
+    public ResponseEntity<java.util.List<PrimaryFamilyDTO>> getSiblings(@PathVariable Integer id) {
+        return ResponseEntity.ok(service.getSiblingsOf(id));
+    }
 }

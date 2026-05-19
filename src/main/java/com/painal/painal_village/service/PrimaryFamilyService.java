@@ -45,6 +45,18 @@ public class PrimaryFamilyService {
                 .collect(java.util.stream.Collectors.toList());
     }
 
+    public java.util.List<PrimaryFamilyDTO> getSiblingsOf(Integer memberId) {
+        PrimaryFamily member = repository.findById(memberId).orElse(null);
+        if (member == null || member.getParentId() == null) {
+            return java.util.Collections.emptyList();
+        }
+        return repository.findByParentId(member.getParentId())
+                .stream()
+                .filter(sibling -> !sibling.getId().equals(memberId))
+                .map(this::convertToDTO)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
     private PrimaryFamilyDTO convertToDTO(PrimaryFamily entity) {
         PrimaryFamilyDTO dto = new PrimaryFamilyDTO();
         dto.setId(entity.getId());
