@@ -28,6 +28,23 @@ public class PrimaryFamilyService {
         return familiesPage.map(this::convertToDTO);
     }
 
+    public PrimaryFamilyDTO getPrimaryFamilyById(Integer id) {
+        return repository.findById(id)
+                .map(this::convertToDTO)
+                .orElse(null);
+    }
+
+    public java.util.List<PrimaryFamilyDTO> getChildrenOf(Integer parentId) {
+        PrimaryFamily parent = repository.findById(parentId).orElse(null);
+        if (parent == null || parent.getChildren() == null || parent.getChildren().isEmpty()) {
+            return java.util.Collections.emptyList();
+        }
+        return repository.findAllById(parent.getChildren())
+                .stream()
+                .map(this::convertToDTO)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
     private PrimaryFamilyDTO convertToDTO(PrimaryFamily entity) {
         PrimaryFamilyDTO dto = new PrimaryFamilyDTO();
         dto.setId(entity.getId());

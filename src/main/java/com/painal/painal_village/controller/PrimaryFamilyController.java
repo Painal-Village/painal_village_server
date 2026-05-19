@@ -5,10 +5,7 @@ import com.painal.painal_village.service.PrimaryFamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/primary-families")
@@ -25,5 +22,19 @@ public class PrimaryFamilyController {
         
         Page<PrimaryFamilyDTO> result = service.getPrimaryFamilies(page, size, search);
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PrimaryFamilyDTO> getPrimaryFamilyById(@PathVariable Integer id) {
+        PrimaryFamilyDTO dto = service.getPrimaryFamilyById(id);
+        if (dto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("/{id}/children")
+    public ResponseEntity<java.util.List<PrimaryFamilyDTO>> getChildren(@PathVariable Integer id) {
+        return ResponseEntity.ok(service.getChildrenOf(id));
     }
 }
