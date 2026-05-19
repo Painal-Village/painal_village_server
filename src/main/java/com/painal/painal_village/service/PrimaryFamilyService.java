@@ -55,6 +55,13 @@ public class PrimaryFamilyService {
         dto.setProfilePhoto(entity.getProfilePhoto());
         dto.setChildren(entity.getChildren());
         dto.setLastUpdated(entity.getLastUpdated());
+
+        // Resolve parent name
+        if (entity.getParentId() != null) {
+            repository.findById(entity.getParentId())
+                    .ifPresent(parent -> dto.setParentName(parent.getName()));
+        }
+
         return dto;
     }
 }

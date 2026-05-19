@@ -9,6 +9,7 @@ import java.util.List;
 public class PrimaryFamilyDTO {
     private Integer id;
     private Integer parentId;
+    private String parentName;
     private String name;
     private String hindiName;
     private String birthYear;
