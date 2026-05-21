@@ -21,5 +21,8 @@ public interface PrimaryFamilyRepository extends JpaRepository<PrimaryFamily, In
     // Batch: find all members who are children of any of the given parent IDs
     // Used to efficiently determine hasChildren for a whole page of members
     List<PrimaryFamily> findByParentIdIn(Set<Integer> parentIds);
+
+    @org.springframework.data.jpa.repository.Query("SELECT COALESCE(MAX(p.id), 0) FROM PrimaryFamily p")
+    Integer findMaxId();
 }
 

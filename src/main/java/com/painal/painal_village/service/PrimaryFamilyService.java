@@ -147,13 +147,17 @@ public class PrimaryFamilyService {
 
         // Create the child with parent_id set
         PrimaryFamily child = new PrimaryFamily();
+        
+        // Manually calculate the next ID because the DB doesn't use auto-increment
+        Integer newId = repository.findMaxId() + 1;
+        child.setId(newId);
+        
         child.setName(request.getName());
         child.setHindiName(request.getHindiName());
         child.setBirthYear(request.getBirthYear());
         child.setParentId(parentId);
         child.setLastUpdated(LocalDateTime.now());
 
-        // JPA auto-generates the ID via IDENTITY strategy
         repository.save(child);
 
         return convertToDTO(child);
