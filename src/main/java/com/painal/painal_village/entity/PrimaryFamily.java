@@ -2,11 +2,8 @@ package com.painal.painal_village.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Entity
@@ -30,10 +27,6 @@ public class PrimaryFamily {
 
     @Column(name = "profile_photo")
     private String profilePhoto;
-
-    @JdbcTypeCode(SqlTypes.ARRAY)
-    @Column(columnDefinition = "integer[]")
-    private List<Integer> children;
 
     @Column(name = "last_updated")
     private LocalDateTime lastUpdated;

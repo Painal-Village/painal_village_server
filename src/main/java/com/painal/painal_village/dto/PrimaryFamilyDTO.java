@@ -3,7 +3,6 @@ package com.painal.painal_village.dto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 public class PrimaryFamilyDTO {
@@ -14,6 +13,6 @@ public class PrimaryFamilyDTO {
     private String hindiName;
     private String birthYear;
     private String profilePhoto;
-    private List<Integer> children;
+    private boolean hasChildren;
     private LocalDateTime lastUpdated;
 }

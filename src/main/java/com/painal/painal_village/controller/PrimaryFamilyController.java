@@ -18,7 +18,7 @@ public class PrimaryFamilyController {
     @GetMapping
     public ResponseEntity<Page<PrimaryFamilyDTO>> getAllPrimaryFamilies(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "10") int size,
             @RequestParam(required = false) String search) {
         
         Page<PrimaryFamilyDTO> result = service.getPrimaryFamilies(page, size, search);
